@@ -7,5 +7,6 @@ public:
             s[left++] = s[right];
             s[right--] = tmp;
         }
+        return;
     }
 };
