@@ -1,10 +1,12 @@
 class Solution {
 public:
+    void rec(int left, int right, vector<char>& s) {
+        if (left >= right) return;
+        swap(s[left], s[right]);
+        rec(left+1, right-1, s);
+    }
+    
     void reverseString(vector<char>& s) {
-        int left = 0, right = s.size()-1;
-        while (left < right) {
-            swap(s[left++], s[right--]);
-//            iter_swap(ileft++, iright--);
-        }
+        rec(0, s.size()-1, s);
     }
 };
