@@ -12,9 +12,9 @@ class Solution {
 public:
     ListNode* _reverseList(ListNode* head, ListNode* prev=nullptr) {
         if (!head) return prev;
-        ListNode* p = _reverseList(head->next, head);
+        ListNode* hnext = head->next;
         head->next = prev;
-        return p;
+        return _reverseList(hnext, head);
     }
     ListNode* reverseList(ListNode* head) {
         // Recursive
