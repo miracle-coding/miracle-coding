@@ -10,13 +10,15 @@
  */
 class Solution {
 public:
+    ListNode* _reverseList(ListNode* head, ListNode* prev=nullptr) {
+        if (!head) return prev;
+        ListNode* p = _reverseList(head->next, head);
+        head->next = prev;
+        return p;
+    }
     ListNode* reverseList(ListNode* head) {
         // Recursive
-        if (!head || !head->next) return head;
-        ListNode* ptr = reverseList(head->next);
-        head->next->next = head;
-        head->next = nullptr;
-        return ptr;
+        return _reverseList(head);
         
         // Iterative
         /*
