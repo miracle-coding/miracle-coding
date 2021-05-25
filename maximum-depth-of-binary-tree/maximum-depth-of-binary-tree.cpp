@@ -11,21 +11,6 @@
  */
 class Solution {
 public:
-    /*
-    void dfs(TreeNode* node, int cnt, int& ans) {
-        if (!node) {
-            ans = max(ans, cnt);
-            return;
-        }
-        dfs(node->left, cnt+1, ans);
-        dfs(node->right, cnt+1, ans);
-    }
-    int maxDepth(TreeNode* root) {
-        int answer = 0;
-        dfs(root, 0, answer);
-        return answer;
-    }
-    */
     int maxDepth(TreeNode* root) {
         if (!root) return 0;
         int res = 0;
@@ -43,4 +28,19 @@ public:
         }
         return res;
     }
+    /*
+    void dfs(TreeNode* node, int cnt, int& ans) {
+        if (!node) {
+            ans = max(ans, cnt);
+            return;
+        }
+        dfs(node->left, cnt+1, ans);
+        dfs(node->right, cnt+1, ans);
+    }
+    int maxDepth(TreeNode* root) {
+        int answer = 0;
+        dfs(root, 0, answer);
+        return answer;
+    }
+    */
 };
