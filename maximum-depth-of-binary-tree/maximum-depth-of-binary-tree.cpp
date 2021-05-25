@@ -20,10 +20,8 @@ public:
             ++res;
             for (int i=0, n=q.size() ; i<n ; ++i) {
                 TreeNode* node = q.front(); q.pop();
-                if (node->left)
-                    q.emplace(node->left);
-                if (node->right)
-                    q.emplace(node->right);
+                if (node->left) q.emplace(node->left);
+                if (node->right) q.emplace(node->right);
             }
         }
         return res;
