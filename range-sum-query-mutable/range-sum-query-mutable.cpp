@@ -2,12 +2,13 @@ class NumArray {
 public:
     NumArray(vector<int>& nums) {
         N = nums.size();
-        int h = (int)ceil(log2(N));
+        int h = ceil(log2(N));
         int tree_size = 1 << (h+1);
         tree.resize(tree_size);
         arr.resize(N);
-        for (int i=0 ; i<N ; ++i)
+        for (int i=0 ; i<N ; ++i) {
             arr[i] = nums[i];
+        }
         
         init(0, 0, N-1);
     }
@@ -15,8 +16,8 @@ public:
     int init(int node, int start, int end) {
         if (start == end) return tree[node] = arr[start];
         int mid = (start + end) / 2;
-        return tree[node] = init(2*node+1, start, mid)
-            + init(2*node+2, mid+1, end);
+        return tree[node] = init(2*node+1, start, mid) +
+            init(2*node+2, mid+1, end);
     }
     
     void update(int index, int val) {
@@ -38,12 +39,12 @@ public:
         return _sum(0, 0, N-1, left, right);
     }
     
-    int _sum(int node, int start, int end, int lquery, int rquery) {
-        if (rquery < start || end < lquery) return 0;
-        if (lquery <= start && end <= rquery) return tree[node];
+    int _sum(int node, int start, int end, int qleft, int qright) {
+        if (qright < start || end < qleft) return 0;
+        if (qleft <= start && end <= qright) return tree[node];
         int mid = (start + end) / 2;
-        return _sum(2*node+1, start, mid, lquery, rquery) +
-            _sum(2*node+2, mid+1, end, lquery, rquery);
+        return _sum(2*node+1, start, mid, qleft, qright) +
+            _sum(2*node+2, mid+1, end, qleft, qright);
     }
     
     vector<int> arr;
