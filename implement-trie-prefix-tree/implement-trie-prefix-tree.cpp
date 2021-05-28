@@ -1,24 +1,20 @@
 class Trie {
-    
 public:
     /** Initialize your data structure here. */
-    typedef struct Node {
+    typedef struct _node {
         char c;
-        bool is_word;
-        struct Node* children[26];        
+        bool end_word;
+        struct _node* children[26];
     } Node;
-    Node* root;
     
+    Node* root;
     Node* get_node(char c) {
         Node* node = new Node();
-        node->c = '\0';
-        node->is_word = false;
-        for (int i=0 ; i<26 ; ++i) {
-            node->children[i] = nullptr;
-        } 
+        node->c = c;
+        node->end_word = false;
+        for (int i=0 ; i<26 ; ++i) node->children[i] = nullptr;
         return node;
     }
-
     Trie() {
         root = get_node('\0');
     }
@@ -28,11 +24,12 @@ public:
         Node* node = root;
         for (int i=0 ; i<word.length() ; ++i) {
             char c = word[i];
-            if (!node->children[c-'a'])
+            if (!node->children[c-'a']) {
                 node->children[c-'a'] = get_node(c);
+            }
             node = node->children[c-'a'];
         }
-        node->is_word = true;
+        node->end_word = true;
     }
     
     /** Returns if the word is in the trie. */
@@ -43,7 +40,7 @@ public:
             if (!node->children[c-'a']) return false;
             node = node->children[c-'a'];
         }
-        return node->is_word;
+        return node->end_word;
     }
     
     /** Returns if there is any word in the trie that starts with the given prefix. */
