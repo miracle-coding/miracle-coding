@@ -22,9 +22,7 @@ public:
         if (s.length() == sm.length()) {
             for (int i=0 ; i<s.length() ; ++i) {
                 if (s[i] < sm[i]) break;
-                if (s[i] > sm[i]) {
-                    return 0;
-                }
+                if (s[i] > sm[i]) return 0;
             }
         }
 
