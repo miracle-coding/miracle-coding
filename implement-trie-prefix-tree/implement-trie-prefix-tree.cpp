@@ -2,54 +2,55 @@ class Trie {
 public:
     /** Initialize your data structure here. */
     typedef struct _node {
-        char c;
-        bool end_word;
+        bool isEnd;
         struct _node* children[26];
     } Node;
-    
     Node* root;
-    Node* get_node(char c) {
-        Node* node = new Node();
-        node->c = c;
-        node->end_word = false;
-        for (int i=0 ; i<26 ; ++i) node->children[i] = nullptr;
-        return node;
-    }
+    
     Trie() {
-        root = get_node('\0');
+        root = get_node();
+    }
+    
+    Node* get_node() {
+        Node* node = new Node();
+        node->isEnd = false;
+        for (int i=0 ; i<26 ; ++i) {
+            node->children[i] = nullptr;
+        }
+        return node;
     }
     
     /** Inserts a word into the trie. */
     void insert(string word) {
-        Node* node = root;
+        Node* ptr = root;
         for (int i=0 ; i<word.length() ; ++i) {
             char c = word[i];
-            if (!node->children[c-'a']) {
-                node->children[c-'a'] = get_node(c);
-            }
-            node = node->children[c-'a'];
+            int idx = c - 'a';
+            if (!ptr->children[idx])
+                ptr->children[idx] = get_node();
+            ptr = ptr->children[idx];
         }
-        node->end_word = true;
+        ptr->isEnd = true;
     }
     
     /** Returns if the word is in the trie. */
     bool search(string word) {
-        Node* node = root;
+        Node* ptr = root;
         for (int i=0 ; i<word.length() ; ++i) {
-            char c = word[i];
-            if (!node->children[c-'a']) return false;
-            node = node->children[c-'a'];
+            int idx = word[i] - 'a';
+            if (!ptr->children[idx]) return false;
+            ptr = ptr->children[idx];
         }
-        return node->end_word;
+        return ptr->isEnd;
     }
     
     /** Returns if there is any word in the trie that starts with the given prefix. */
     bool startsWith(string prefix) {
-        Node* node = root;
+        Node* ptr = root;
         for (int i=0 ; i<prefix.length() ; ++i) {
-            char c = prefix[i];
-            if (!node->children[c-'a']) return false;
-            node = node->children[c-'a'];
+            int idx = prefix[i] - 'a';
+            if (!ptr->children[idx]) return false;
+            ptr = ptr->children[idx];
         }
         return true;
     }
