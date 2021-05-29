@@ -16,18 +16,14 @@ public:
     }
     
     int count_num_provinces() {
-        printf("### count_num_provinces \n");
-        
         unordered_map<int, int> umap;
         int cnt = 0;
         for (int i=0 ; i<parent.size() ; ++i) {
             int x = get_parent(i);
-            printf("parent[%d] = %d \n", i, x);
             if (umap.find(x) == umap.end()) {
                 ++umap[x];
                 ++cnt;
             }
-            printf("umap[%d] = %d \n", x, umap[x]);
         }
         return cnt;
     }
