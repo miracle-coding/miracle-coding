@@ -32,7 +32,7 @@ public:
             parent[num] = num;
             group[num] = 1;
             
-            if (parent.find(num+1) != parent.end()) {
+            if (parent.find(num+1) != parent.end() && group[num+1]) {
                 merge(num, num+1);
             }
             
