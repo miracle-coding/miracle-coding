@@ -26,6 +26,7 @@ public:
     
     int longestConsecutive(vector<int>& nums) {
         if (nums.empty()) return 0;
+        if (1 == nums.size()) return 1;
         longest_size = 1;
         for (int& num : nums) {
             if (parent.find(num) != parent.end()) continue;
