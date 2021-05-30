@@ -21,7 +21,8 @@ public:
             group[idx] += group[x];
             group[x] = 0;
         }
-        longest_size = max(longest_size, group[idx]);
+        if (longest_size < group[idx])
+            longest_size = group[idx];
     }
     
     int longestConsecutive(vector<int>& nums) {
