@@ -3,18 +3,21 @@ public:
     int longestConsecutive(vector<int>& nums) {
         set<int> seq(nums.begin(), nums.end());
         int longest = 0;
-        unordered_map<int, int> memo;
-        for (int& x : nums) {
+//        unordered_map<int, int> memo;
+        
+        for (auto& x : seq) {
             if (seq.find(x-1) != seq.end()) continue;
+            /*
             if (memo[x+1]) {
                 memo[x] = 1 + memo[x+1];
                 longest = max(longest, memo[x]);
                 continue;
             }
+            */
             int y = x + 1;
             while (seq.find(y) != seq.end()) ++y;
             longest = max(longest, y-x);
-            memo[x] = longest;
+//            memo[x] = longest;
         }
         return longest;
     }
